@@ -276,7 +276,7 @@ export default function App() {
           meetingId,
           micEnabled: true,
           webcamEnabled: false,
-          name: "Pavan",
+          name: "User",
         }}
         token={AUTH_TOKEN}
       >
