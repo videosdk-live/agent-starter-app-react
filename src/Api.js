@@ -62,7 +62,6 @@ export const verifyMeeting = async (meetingId) => {
 
 // Dispatch Agent
 export const dispatchAgent = async ({ meetingId }) => {
-  return true;
   try {
     if (!AUTH_TOKEN) throw new Error("AUTH_TOKEN is missing");
     if (!AGENT_ID) throw new Error("AGENT_ID is missing");
