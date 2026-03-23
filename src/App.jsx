@@ -184,7 +184,7 @@ export default function App() {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showCapacityModal, setShowCapacityModal] = useState(false);
   const [showAgentLeftModal, setShowAgentLeftModal] = useState(false);
-  const AUTH_TOKEN = import.meta.env.VITE_AUTH_TOKEN;
+  const AUTH_TOKEN = import.meta.env.AUTH_TOKEN;
 
   const handleStatusChange = (newStatus, withToast = false) => {
     setStatus(newStatus);
@@ -211,7 +211,7 @@ export default function App() {
     setShowLoader(true);
 
     try {
-      let id = import.meta.env.VITE_MEETING_ID;
+      let id = import.meta.env.MEETING_ID;
 
       if (id) {
         const isValid = await verifyMeeting(id);

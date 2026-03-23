@@ -34,8 +34,8 @@ export const COLORS = {
     BORDER: '#E1E2EA1A',
     TEXT: '#C5C6CE',
   },
-  DARK_BG: '#111111',
+  DARK_BG: '#000000',
   CARD_BG: '#1a1a1a',
   FOOTER_TEXT: '#464649',
-  ICON_GRAY: '#6b7280', // Approximate for WaveformIcon gray
+  ICON_GRAY: '#6b7280',
 };

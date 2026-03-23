@@ -43,13 +43,14 @@ cp .env.example .env
 Update the `.env` file with the following values:
 
 ```env
-VITE_AUTH_TOKEN=your_videosdk_auth_token
-VITE_AGENT_ID=your_agent_id
-VITE_MEETING_ID=your_meeting_id (optional)
+AUTH_TOKEN=your_videosdk_auth_token
+AGENT_ID=your_agent_id
+MEETING_ID=your_meeting_id (optional)
+VERSION_ID=your_version_id (optional)
 ```
 
 > [!TIP]
-> You can obtain your `VITE_AUTH_TOKEN` from the [VideoSDK Dashboard](https://app.videosdk.live/).
+> You can obtain your `AUTH_TOKEN` from the [VideoSDK Dashboard](https://app.videosdk.live/).
 
 ### 4. Run the development server
 ```bash
@@ -63,9 +64,10 @@ The application will be available at `http://localhost:5173`.
 
 | Variable | Description | Required |
 |----------|------------|----------|
-| `VITE_AUTH_TOKEN` | VideoSDK authorization token | Yes |
-| `VITE_AGENT_ID` | ID of the AI agent to connect with | Yes |
-| `VITE_MEETING_ID` | Meeting ID to join (optional) | No |
+| `AUTH_TOKEN` | VideoSDK authorization token | Yes |
+| `AGENT_ID` | ID of the AI agent to connect with | Yes |
+| `MEETING_ID` | Meeting ID to join (optional) | No |
+| `VERSION_ID` | Version ID of the AI agent (optional) | No |
 
 ---
 <p align="center">
