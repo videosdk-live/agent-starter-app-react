@@ -100,7 +100,7 @@ const DeviceDropdown = ({
   return (
     <div
       ref={dropdownRef}
-      className="absolute bottom-[calc(100%+8px)] left-0 z-[100] w-64 bg-[#111111] border border-white/10 rounded-xl shadow-2xl p-2 animate-in fade-in slide-in-from-bottom-2 duration-200"
+      className="absolute bottom-[calc(100%+8px)] left-0 z-[100] w-64 bg-dropdown border border-white/10 rounded-xl shadow-2xl p-2 animate-in fade-in slide-in-from-bottom-2 duration-200"
     >
       <div className="max-h-48 overflow-y-auto custom-scrollbar flex flex-col gap-1">
         {!hasPermission ? (

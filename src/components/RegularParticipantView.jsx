@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useParticipant } from "@videosdk.live/react-sdk";
+import clsx from "clsx";
 import { useVideoStream } from "../hooks/useVideoStream";
 
 const RegularParticipantView = ({ participantId }) => {
@@ -13,10 +14,10 @@ const RegularParticipantView = ({ participantId }) => {
 
   return (
     <div
-      className="relative overflow-hidden flex items-center justify-center w-full aspect-video rounded-[28px]"
-      style={{
-        background: webcamOn ? "#1B1B1E" : "#28292B",
-      }}
+      className={clsx(
+        "relative overflow-hidden flex items-center justify-center w-full aspect-video rounded-tile",
+        webcamOn ? "bg-card" : "bg-card-alt"
+      )}
     >
       {webcamOn ? (
         <video
@@ -24,16 +25,12 @@ const RegularParticipantView = ({ participantId }) => {
           playsInline
           muted
           ref={videoRef}
-          className="w-full h-full object-cover rounded-[28px]"
+          className="w-full h-full object-cover rounded-tile"
         />
       ) : (
         <div className="flex items-center justify-center w-full h-full">
-          <div
-            className="flex items-center justify-center rounded-full w-[30%] aspect-square bg-[#1B1B1E]"
-          >
-            <span
-              className="font-['Inter'] font-semibold text-[3vw] leading-none text-white text-center"
-            >
+          <div className="flex items-center justify-center rounded-full w-[30%] aspect-square bg-card">
+            <span className="font-semibold text-[3vw] leading-none text-white text-center">
               {initial}
             </span>
           </div>
@@ -41,16 +38,7 @@ const RegularParticipantView = ({ participantId }) => {
       )}
 
       {/* YOU Label */}
-      <div
-        className="absolute bottom-[12px] left-[12px] text-white uppercase font-bold"
-        style={{
-          borderRadius: "14px",
-          padding: "3px 8px",
-          background: "#0C4A6E",
-          border: "1px solid #075985",
-          fontSize: "10px",
-        }}
-      >
+      <div className="absolute bottom-[12px] left-[12px] text-white uppercase font-bold rounded-badge-lg px-[8px] py-[3px] bg-you border border-you-border text-[10px]">
         You
       </div>
     </div>

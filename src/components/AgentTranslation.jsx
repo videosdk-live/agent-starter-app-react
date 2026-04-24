@@ -25,13 +25,9 @@ const AgentTranslation = ({ transcriptions = [], isChatOpen, isSidebar }) => {
         "z-40 flex flex-col pointer-events-auto",
         isSidebar
           ? "relative w-full h-full"
-          : "absolute left-1/2 -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] justify-end"
+          : "absolute left-1/2 -translate-x-1/2 transition-all duration-500 ease-smooth justify-end w-[500px] h-[172px]",
+        !isSidebar && (isChatOpen ? "bottom-[180px]" : "bottom-[115px]")
       )}
-      style={!isSidebar ? {
-        width: "500px",
-        height: "172px",
-        bottom: isChatOpen ? "180px" : "115px",
-      } : {}}
     >
       {transcriptions.length > 0 ? (
         <div
@@ -45,15 +41,8 @@ const AgentTranslation = ({ transcriptions = [], isChatOpen, isSidebar }) => {
               className="flex flex-row items-start gap-[10.67px] w-full shrink-0"
             >
               {/* Avatar Circle */}
-              <div
-                className="flex items-center justify-center rounded-full bg-[#919093] mt-[2px]"
-                style={{
-                  width: "25.6px",
-                  height: "25.6px",
-                  flexShrink: 0,
-                }}
-              >
-                <span className="text-[#1B1B1E] font-['Inter'] font-medium text-[12px]">
+              <div className="flex items-center justify-center rounded-full bg-muted mt-[2px] w-[25.6px] h-[25.6px] shrink-0">
+                <span className="text-card font-medium text-[12px]">
                   {t.participantName?.charAt(0).toUpperCase() || "A"}
                 </span>
               </div>
@@ -61,30 +50,12 @@ const AgentTranslation = ({ transcriptions = [], isChatOpen, isSidebar }) => {
               {/* Text Column (Name + Transcribed Text) */}
               <div className="flex flex-col items-start gap-1 w-full text-left">
                 {/* Participant Name */}
-                <span
-                  className="font-['Inter']"
-                  style={{
-                    fontWeight: 400,
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                    letterSpacing: "0%",
-                    color: "#919093",
-                  }}
-                >
+                <span className="font-normal text-[14px] leading-[20px] text-muted">
                   {t.participantName || "Agent"}
                 </span>
 
                 {/* Transcription Text */}
-                <p
-                  className="font-['Inter'] w-full"
-                  style={{
-                    fontWeight: 500,
-                    fontSize: "14px",
-                    lineHeight: "20px",
-                    letterSpacing: "0%",
-                    color: "#FFFFFF",
-                  }}
-                >
+                <p className="w-full font-medium text-[14px] leading-[20px] text-white">
                   {t.text}
                 </p>
               </div>

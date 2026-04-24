@@ -81,7 +81,7 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
                 {agentParticipant ? (
                   <AgentParticipantView participantId={agentParticipant.id} />
                 ) : (
-                  <div className="w-full h-full bg-[#1B1B1E] rounded-[28px]" />
+                  <div className="w-full h-full bg-card rounded-tile" />
                 )}
               </div>
 
@@ -118,7 +118,7 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
                     <RegularParticipantView participantId={localParticipant.id} />
                   ) : (
                     <div
-                      className="w-full h-full bg-[#1B1B1E] rounded-[28px] flex items-center justify-center"
+                      className="w-full h-full bg-card rounded-tile flex items-center justify-center"
                       style={{ animation: "fadeIn 300ms ease" }}
                     >
                       <span className="text-white text-4xl font-semibold">
@@ -132,7 +132,7 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
                   {agentParticipant ? (
                     <AgentParticipantView participantId={agentParticipant.id} />
                   ) : (
-                    <div className="w-full h-full bg-[#1B1B1E] rounded-[28px]" />
+                    <div className="w-full h-full bg-card rounded-tile" />
                   )}
                 </div>
 

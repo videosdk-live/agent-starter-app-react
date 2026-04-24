@@ -39,7 +39,7 @@ export const AgentOrb = ({
       {!status && !showLoader && (
         <button 
           onClick={onTalkToAgent}
-          className="absolute z-30 flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-[0_8px_30px_rgb(0,0,0,0.5)] text-sm font-medium text-gray-800 hover:bg-gray-50 transition-all active:scale-95 cursor-pointer"
+          className="absolute z-30 flex items-center gap-2 bg-white px-5 py-2.5 rounded-full shadow-orb text-sm font-medium text-gray-800 hover:bg-gray-50 transition-all active:scale-95 cursor-pointer"
         >
           <WaveformIcon />
           Talk to agent

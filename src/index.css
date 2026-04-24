@@ -1,5 +1,60 @@
 @import "tailwindcss";
 
+@theme {
+  /* Font family */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Easing */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Surface colors */
+  --color-card: #1B1B1E;
+  --color-card-alt: #28292B;
+  --color-modal: #101113;
+  --color-dropdown: #111111;
+  --color-btn-secondary: #2E3037;
+  --color-step: #303033;
+  --color-step-hover: #5E5E61;
+
+  /* Text / accents */
+  --color-muted: #919093;
+  --color-footer: #464649;
+  --color-icon-gray: #6b7280;
+  --color-accent: #D1BCFE;
+  --color-accent-bg: #37265E;
+
+  /* Participant "You" label */
+  --color-you: #0C4A6E;
+  --color-you-border: #075985;
+
+  /* Agent badge */
+  --color-agent-badge: #713F12;
+  --color-agent-badge-text: #FEF08A;
+  --color-agent-badge-border: #854D0E;
+
+  /* Danger / error */
+  --color-danger: #991B1B;
+  --color-danger-hover: #B91C1C;
+  --color-danger-text: #F87171;
+  --color-error-bg: #FEE2E2;
+  --color-error-border: #FECACA;
+
+  /* Border radii */
+  --radius-tile: 28px;
+  --radius-modal: 24px;
+  --radius-modal-inner: 23px;
+  --radius-badge: 12px;
+  --radius-badge-lg: 14px;
+  --radius-button: 8px;
+  --radius-button-sm: 6px;
+
+  /* Shadows */
+  --shadow-button: inset -1px -1px 1px 0 #00000040, 0 4px 4px 0 #00000040;
+  --shadow-agent-badge: inset -1.17px -1.17px 1.17px rgba(0,0,0,0.25), 0 4.69px 4.69px rgba(0,0,0,0.25);
+  --shadow-orb: 0 8px 30px rgb(0 0 0 / 0.5);
+}
+
 body {
   background: #000000;
+  font-family: var(--font-sans);
 }

@@ -45,7 +45,7 @@ const GroupWrapper = forwardRef(({ children, className, onClick }, ref) => (
     ref={ref}
     onClick={onClick}
     className={clsx(
-      "flex items-center bg-[#1B1B1E] rounded-[8px] border-[0.5px] border-[#303033] hover:border-[#5E5E61] transition-all duration-150 shadow-inner font-['Inter'] relative cursor-pointer",
+      "flex items-center bg-card rounded-button border-[0.5px] border-step hover:border-step-hover transition-all duration-150 shadow-inner relative cursor-pointer",
       className,
     )}
   >
@@ -161,23 +161,19 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
   return (
     <div
       className={clsx(
-        "p-[1px] pb-0 rounded-[24px] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] transform-gpu",
+        "p-[1px] pb-0 rounded-modal transition-all duration-500 ease-smooth transform-gpu w-[500px] bg-gradient-to-b from-white/20 to-white/0",
         chatOn ? "min-h-[137px]" : "min-h-[72px]"
       )}
-      style={{
-        width: "500px",
-        background: "linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)",
-      }}
     >
       <div
         className={clsx(
-          "flex flex-col bg-black rounded-[23px] w-full h-full p-[20px_24px] transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] shadow-2xl transform-gpu will-change-transform",
+          "flex flex-col bg-black rounded-modal-inner w-full h-full p-[20px_24px] transition-all duration-500 ease-smooth shadow-2xl transform-gpu will-change-transform",
           chatOn ? "justify-between" : "justify-center"
         )}
       >
         <div
           className={clsx(
-            "flex flex-col transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden",
+            "flex flex-col transition-all duration-500 ease-smooth overflow-hidden",
             chatOn ? "h-[56px] opacity-100 mb-2" : "h-0 opacity-0 mb-0"
           )}
         >
@@ -185,14 +181,14 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
             <input
               type="text"
               placeholder="Type something..."
-              className="bg-transparent text-white border-none outline-none font-['Inter'] text-[14px] leading-[20px] w-[350px] placeholder:text-white/40"
+              className="bg-transparent text-white border-none outline-none text-[14px] leading-[20px] w-[350px] placeholder:text-white/40"
               value={chatMessage}
               onChange={(e) => setChatMessage(e.target.value)}
             />
             <button
               disabled={!chatMessage.trim()}
               className={clsx(
-                "w-8 h-8 flex items-center justify-center bg-[#303033] rounded-[6px] border-[0.5px] border-transparent shadow-[-1px_-1px_1px_0px_#00000040_inset,0px_4px_4px_0px_#00000040] transition-all duration-200",
+                "w-8 h-8 flex items-center justify-center bg-step rounded-button-sm border-[0.5px] border-transparent shadow-button transition-all duration-200",
                 chatMessage.trim() ? "opacity-100 hover:border-white cursor-pointer" : "opacity-50 cursor-not-allowed"
               )}
               onClick={handleSendMessage}
@@ -204,7 +200,7 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
         </div>
 
         <div className="flex items-center justify-start gap-[12px] h-[32px] w-full">
-          <div className="text-[#919093] font-['Inter'] font-normal text-[14px] leading-[20px] text-left select-none shrink-0 tabular-nums">
+          <div className="text-muted font-normal text-[14px] leading-[20px] text-left select-none shrink-0 tabular-nums">
             {timer}
           </div>
 
@@ -288,7 +284,7 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
 
             <ButtonComponent
               isOn={sharingOn} onClick={() => toggleScreenShare()}
-              className={clsx("w-8 h-8 p-1 gap-1 transition-all duration-200 hover:border-white text-white", sharingOn ? "bg-[#37265E] border-[#D1BCFE]" : "bg-[#1B1B1E] border-[#303033]")}
+              className={clsx("w-8 h-8 p-1 gap-1 transition-all duration-200 hover:border-white text-white", sharingOn ? "bg-accent-bg border-accent" : "bg-card border-step")}
               BtnIcon={MonitorUp}
             />
 
@@ -302,7 +298,7 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
           <div className="ml-auto">
             <ButtonComponent
               variant="danger" label="End Call"
-              className="w-[79px] h-[32px] p-[6px_12px] gap-[4px] rounded-[8px] font-bold"
+              className="w-[79px] h-[32px] p-[6px_12px] gap-[4px] rounded-button font-bold"
               onClick={() => { end(); onEnd?.(); }}
             />
           </div>

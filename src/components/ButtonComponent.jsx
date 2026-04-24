@@ -4,14 +4,14 @@ import { Spinner } from "../ui/spinner";
 
 const VARIANT_CONFIGS = {
   default: {
-    bg: "bg-[#1B1B1E]",
-    border: "border-[#303033]",
-    hoverBorder: "hover:border-[#5E5E61]",
-    active: (isOn) => (isOn ? "border-[#FFFFFF]" : "border-[#F87171]"),
+    bg: "bg-card",
+    border: "border-step",
+    hoverBorder: "hover:border-step-hover",
+    active: (isOn) => (isOn ? "border-white" : "border-danger-text"),
   },
   danger: {
-    bg: "bg-[#991B1B]",
-    hoverBg: "hover:bg-[#B91C1C]",
+    bg: "bg-danger",
+    hoverBg: "hover:bg-danger-hover",
     text: "text-white",
     base: "border-none",
   },
@@ -20,7 +20,7 @@ const VARIANT_CONFIGS = {
     border: (isOn) => (isOn ? "border-[#FFFFFF1A]" : "border-[#F871711A]"),
     hoverBg: (isOn) => (isOn ? "hover:bg-[#FFFFFF0D]" : "hover:bg-[#F871710D]"),
     hoverBorder: (isOn) => (isOn ? "hover:border-[#FFFFFF33]" : "hover:border-[#F8717133]"),
-    active: (isOn) => (isOn ? "border-[#FFFFFF]" : "border-[#F87171]"),
+    active: (isOn) => (isOn ? "border-white" : "border-danger-text"),
   },
 };
 
@@ -69,8 +69,8 @@ const ButtonComponent = forwardRef(function ButtonComponent(
     return clsx(classes);
   };
 
-  const baseClasses = "flex items-center justify-center cursor-pointer transition-all duration-150 rounded-[8px] border-[0.5px] font-['Inter'] font-medium text-[12px] leading-[16px] select-none shadow-[-1px_-1px_1px_0px_#00000040_inset,0px_4px_4px_0px_#00000040] relative overflow-hidden";
-  const textClasses = config.text || (isOn ? "text-white" : "text-[#F87171]");
+  const baseClasses = "flex items-center justify-center cursor-pointer transition-all duration-150 rounded-button border-[0.5px] font-medium text-[12px] leading-[16px] select-none shadow-button relative overflow-hidden";
+  const textClasses = config.text || (isOn ? "text-white" : "text-danger-text");
 
   return (
     <button

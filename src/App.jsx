@@ -4,7 +4,6 @@ import sampleGif from "./assets/sample_gif.gif";
 import { StatusBadge } from "./components/StatusBadge";
 import { AgentOrb } from "./components/AgentOrb";
 import { Toast } from "./components/Toast";
-import { COLORS } from "./constants/colors";
 import { createMeeting, dispatchAgent, verifyMeeting } from "./Api";
 import { MeetingControls } from "./components/MeetingControls";
 import MeetingView from "./components/MeetingView";
@@ -76,10 +75,7 @@ const MainContent = ({
   setAgentState,
 }) => {
   return (
-    <div
-      className="min-h-screen flex flex-col items-center relative font-['Inter']"
-      style={{ backgroundColor: COLORS.DARK_BG }}
-    >
+    <div className="min-h-screen flex flex-col items-center relative bg-black">
       {!(status === "Connected" && tilesVisible) && (
         <StatusBadge
           status={
@@ -132,10 +128,7 @@ const MainContent = ({
         )}
       </div>
 
-      <div
-        className="pb-8 w-[251px] h-[16px] font-['Inter'] font-normal text-[12px] leading-[16px] text-center"
-        style={{ color: COLORS.FOOTER_TEXT }}
-      >
+      <div className="pb-8 w-[251px] h-[16px] font-normal text-[12px] leading-[16px] text-center text-footer">
         Powered by VideoSDK
       </div>
     </div>
