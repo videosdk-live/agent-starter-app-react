@@ -24,7 +24,7 @@ Use the following steps to run the project locally:
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/videosdk-live/agent-starter-app-react.git
-cd agent-starter-app-react
+cd agent-starter-react
 ```
 
 ### 2. Install dependencies
@@ -49,10 +49,15 @@ MEETING_ID=your_meeting_id (optional)
 VERSION_ID=your_version_id (optional)
 ```
 
-> [!TIP]
-> You can obtain your `AUTH_TOKEN` from the [VideoSDK Dashboard](https://app.videosdk.live/).
+### 4. How to access these `.env` Credentials?
 
-### 4. Run the development server
+| Token/ID     | Where to Find it |
+| ------------ | ------------------------------------ |
+| `AUTH_TOKEN` | Navigate to [VideoSDK's Dashboard](https://app.videosdk.live/) > API Keys > Clicking on '🔑' icon <br> | 
+| `AGENT_ID`   | VideoSDK's Dashboard > `Agent` Tab > `Agents` > Choose your preferred agent <br> | 
+| `VERSION_ID` | Commit changes to the selected agent and deploy. Now click on the three dots (`...`) at the top-right corner > `View Deployments` > and copy the version. <br> | 
+
+### 5. Run the development server
 ```bash
 npm run dev
 ```
