@@ -11,7 +11,7 @@ export default defineConfig(({ mode }) => {
       "import.meta.env.AUTH_TOKEN": JSON.stringify(env.AUTH_TOKEN || ""),
       "import.meta.env.MEETING_ID": JSON.stringify(env.MEETING_ID || ""),
       "import.meta.env.AGENT_ID": JSON.stringify(env.AGENT_ID || ""),
-      "import.meta.env.VERSION_ID": JSON.stringify(env.VERSION_ID || ""),
+      "import.meta.env.VERSION_TAG": JSON.stringify(env.VERSION_TAG || ""),
     },
   };
 });
