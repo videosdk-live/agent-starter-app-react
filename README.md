@@ -46,11 +46,13 @@ Update the `.env` file with the following values:
 AUTH_TOKEN=your_videosdk_auth_token
 AGENT_ID=your_agent_id
 MEETING_ID=your_meeting_id (optional)
-VERSION_ID=your_version_id (optional)
+VERSION_TAG=your_version_tag (optional)
 ```
 
 > [!TIP]
 > You can obtain your `AUTH_TOKEN` from the [VideoSDK Dashboard](https://app.videosdk.live/).
+
+**About `VERSION_TAG`:** Open your agent's **Branches** tab on the dashboard, click the 3 dots beside a branch and select **"See Branch History"**, then copy the tag of the version you want. Leave it empty to use the latest deployed version.
 
 ### 4. Run the development server
 ```bash
@@ -66,8 +68,8 @@ The application will be available at `http://localhost:5173`.
 |----------|------------|----------|
 | `AUTH_TOKEN` | VideoSDK authorization token | Yes |
 | `AGENT_ID` | ID of the AI agent to connect with | Yes |
-| `MEETING_ID` | Meeting ID to join (optional) | No |
-| `VERSION_ID` | Version ID of the AI agent (optional) | No |
+| `MEETING_ID` | Meeting ID to join; if empty, a new meeting is created | No |
+| `VERSION_TAG` | Version tag of the agent; if empty, the backend dispatches the latest version | No |
 
 ---
 <p align="center">

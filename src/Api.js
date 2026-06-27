@@ -1,7 +1,7 @@
 const AUTH_TOKEN = import.meta.env.AUTH_TOKEN;
 const AGENT_ID = import.meta.env.AGENT_ID;
 const ENV_MEETING_ID = import.meta.env.MEETING_ID ?? "";
-const VERSION_ID = import.meta.env.VERSION_ID ?? "";
+const VERSION_TAG = import.meta.env.VERSION_TAG ?? "";
 
 if (!AUTH_TOKEN) console.error("AUTH_TOKEN is missing");
 if (!AGENT_ID) console.error("AGENT_ID is missing");
@@ -67,35 +67,10 @@ export const dispatchAgent = async ({ meetingId }) => {
     if (!AUTH_TOKEN) throw new Error("AUTH_TOKEN is missing");
     if (!AGENT_ID) throw new Error("AGENT_ID is missing");
 
-    let versionId = VERSION_ID;
-    if (!versionId) {
-      const response = await fetch(
-        `https://api.videosdk.live/ai/v1/agents/${AGENT_ID}/versions`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: AUTH_TOKEN,
-            "Content-Type": "application/json",
-          },
-        },
-      );
-
-      if (!response.ok) {
-        console.error("API failed:", response.status);
-        return false;
-      }
-
-      const versionsData = await response.json();
-      versionId = versionsData?.versions?.[0]?.versionId;
-    }
-
     const body = {
       meetingId,
       agentId: AGENT_ID,
-      ...(versionId && {
-        versionId,
-        versionTag: versionId,
-      }),
+      ...(VERSION_TAG && { versionTag: VERSION_TAG }),
     };
 
     // Dispatch agent
