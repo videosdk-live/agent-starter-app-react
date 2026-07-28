@@ -13,8 +13,8 @@ export const useMediaPermissions = () => {
       const perms = await checkPermissions();
       setAudioPermission(perms.get(Constants.permission.AUDIO));
       setVideoPermission(perms.get(Constants.permission.VIDEO));
-    } catch (e) {
-      console.error("Error checking permissions", e);
+    } catch (err) {
+      console.error('checkPermissions failed', err);
     }
   };
 
@@ -44,8 +44,8 @@ export const useMediaPermissions = () => {
       await requestPermission(pType);
       await refreshPermissions();
       return true;
-    } catch (e) {
-      console.error("Request permission failed", e);
+    } catch (err) {
+      console.error('requestPermission failed', err);
       return false;
     }
   };

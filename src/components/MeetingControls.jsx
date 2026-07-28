@@ -103,16 +103,72 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
     setActiveDropdown(activeDropdown === type ? null : type);
   };
 
-  const handleToggleMic = () => micDecline ? setModalState({ isOpen: true, type: "mic" }) : toggleMic();
-  const handleToggleWebcam = () => camDecline ? setModalState({ isOpen: true, type: "webcam" }) : toggleWebcam();
+  const handleToggleMic = async () => {
+    if (micDecline) {
+      setModalState({ isOpen: true, type: "mic" });
+      return;
+    }
+    try {
+      await toggleMic();
+    } catch (err) {
+      console.error('toggleMic failed', err);
+    }
+  };
+
+  const handleToggleWebcam = async () => {
+    if (camDecline) {
+      setModalState({ isOpen: true, type: "webcam" });
+      return;
+    }
+    try {
+      await toggleWebcam();
+    } catch (err) {
+      console.error('toggleWebcam failed', err);
+    }
+  };
+
+  const handleToggleScreenShare = async () => {
+    try {
+      await toggleScreenShare();
+    } catch (err) {
+      console.error('toggleScreenShare failed', err);
+    }
+  };
+
+  const handleChangeMic = async (id, label) => {
+    setSelectedMic({ id, label });
+    try {
+      await changeMic(id);
+    } catch (err) {
+      console.error('changeMic failed', err);
+    }
+  };
+
+  const handleChangeWebcam = async (id, label) => {
+    setSelectedWebcam({ id, label });
+    try {
+      await changeWebcam(id);
+    } catch (err) {
+      console.error('changeWebcam failed', err);
+    }
+  };
+
+  const handleEndCall = async () => {
+    try {
+      await end();
+    } catch (err) {
+      console.error('end failed', err);
+    }
+    onEnd?.();
+  };
 
   const handleSendMessage = async () => {
     if (!chatMessage.trim()) return;
     try {
       await publish(chatMessage.trim());
       setChatMessage("");
-    } catch (error) {
-      console.error("Error sending chat message:", error);
+    } catch (err) {
+      console.error('publish failed', err);
     }
   };
 
@@ -130,22 +186,34 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
   useEffect(() => {
     const initDevices = async () => {
       if (audioPermission) {
-        const mics = await getMicrophones();
-        if (mics?.length > 0 && !selectedMic.id) {
-          const defaultMic = mics.find(d => d.deviceId === "default") || mics[0];
-          setSelectedMic({ id: defaultMic.deviceId, label: defaultMic.label });
+        try {
+          const mics = await getMicrophones();
+          if (mics?.length > 0 && !selectedMic.id) {
+            const defaultMic = mics.find(d => d.deviceId === "default") || mics[0];
+            setSelectedMic({ id: defaultMic.deviceId, label: defaultMic.label });
+          }
+        } catch (err) {
+          console.error('getMicrophones failed', err);
         }
-        const speakers = await getPlaybackDevices();
-        if (speakers?.length > 0 && !selectedSpeaker.id) {
-          const defaultSpk = speakers.find(d => d.deviceId === "default") || speakers[0];
-          setSelectedSpeaker({ id: defaultSpk.deviceId, label: defaultSpk.label });
+        try {
+          const speakers = await getPlaybackDevices();
+          if (speakers?.length > 0 && !selectedSpeaker.id) {
+            const defaultSpk = speakers.find(d => d.deviceId === "default") || speakers[0];
+            setSelectedSpeaker({ id: defaultSpk.deviceId, label: defaultSpk.label });
+          }
+        } catch (err) {
+          console.error('getPlaybackDevices failed', err);
         }
       }
       if (videoPermission) {
-        const cams = await getCameras();
-        if (cams?.length > 0 && !selectedWebcam.id) {
-          const defaultCam = cams.find(d => d.deviceId === "default") || cams[0];
-          setSelectedWebcam({ id: defaultCam.deviceId, label: defaultCam.label });
+        try {
+          const cams = await getCameras();
+          if (cams?.length > 0 && !selectedWebcam.id) {
+            const defaultCam = cams.find(d => d.deviceId === "default") || cams[0];
+            setSelectedWebcam({ id: defaultCam.deviceId, label: defaultCam.label });
+          }
+        } catch (err) {
+          console.error('getCameras failed', err);
         }
       }
     };
@@ -231,7 +299,7 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
                 <DeviceDropdown
                   type="mic" isOpen anchorRef={micRef} selectedDeviceId={selectedMic.id}
                   onClose={() => setActiveDropdown(null)}
-                  onSelect={(id, label) => { setSelectedMic({ id, label }); changeMic(id); }}
+                  onSelect={handleChangeMic}
                 />
               )}
             </GroupWrapper>
@@ -277,13 +345,13 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
                 <DeviceDropdown
                   type="webcam" isOpen anchorRef={webcamRef} selectedDeviceId={selectedWebcam.id}
                   onClose={() => setActiveDropdown(null)}
-                  onSelect={(id, label) => { setSelectedWebcam({ id, label }); changeWebcam(id); }}
+                  onSelect={handleChangeWebcam}
                 />
               )}
             </GroupWrapper>
 
             <ButtonComponent
-              isOn={sharingOn} onClick={() => toggleScreenShare()}
+              isOn={sharingOn} onClick={handleToggleScreenShare}
               className={clsx("w-8 h-8 p-1 gap-1 transition-all duration-200 hover:border-white text-white", sharingOn ? "bg-accent-bg border-accent" : "bg-card border-step")}
               BtnIcon={MonitorUp}
             />
@@ -299,7 +367,7 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
             <ButtonComponent
               variant="danger" label="End Call"
               className="w-[79px] h-[32px] p-[6px_12px] gap-[4px] rounded-button font-bold"
-              onClick={() => { end(); onEnd?.(); }}
+              onClick={handleEndCall}
             />
           </div>
         </div>
@@ -312,8 +380,19 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
         onEnable={async () => {
           const success = await requestPermission(modalState.type);
           if (success) {
-            if (modalState.type === "mic") toggleMic();
-            else toggleWebcam();
+            if (modalState.type === "mic") {
+              try {
+                await toggleMic();
+              } catch (err) {
+                console.error('toggleMic failed', err);
+              }
+            } else {
+              try {
+                await toggleWebcam();
+              } catch (err) {
+                console.error('toggleWebcam failed', err);
+              }
+            }
           }
         }}
       />

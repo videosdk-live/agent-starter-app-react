@@ -11,6 +11,14 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
   const { participants, localParticipant, disableScreenShare } = useMeeting();
   const [transcriptions, setTranscriptions] = useState([]);
 
+  const handleStopSharing = async () => {
+    try {
+      await disableScreenShare();
+    } catch (err) {
+      console.error('disableScreenShare failed', err);
+    }
+  };
+
   const handleTranscription = (data) => {
     if (data?.segment?.text) {
       setTranscriptions((prev) => {
@@ -65,7 +73,7 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
             {/* Left side: Screen share placeholder */}
             <div className="flex-[3] min-h-0 pointer-events-auto">
               <ScreenSharePlaceholder
-                onStopSharing={() => disableScreenShare()}
+                onStopSharing={handleStopSharing}
               />
             </div>
 

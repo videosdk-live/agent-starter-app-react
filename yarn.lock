@@ -825,18 +825,19 @@
   dependencies:
     csstype "^3.2.2"
 
-"@videosdk.live/js-sdk@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@videosdk.live/js-sdk/-/js-sdk-0.7.0.tgz#a0062679b5b93dade5886fa140238ea5aca202f2"
-  integrity sha512-JJVxHSDR/gUhTnEvN8loYZCDQySlMlOtod7G/yvjWV/BwqTFFMBzfMZlfjYqzh7qGW7Fj/J9cNT9x0hMzlj/tg==
+"@videosdk.live/js-sdk@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@videosdk.live/js-sdk/-/js-sdk-1.0.1.tgz#7bdacc393665921b9f7ea20504cfeba861164497"
+  integrity sha512-cCdSviev7HOyoLY07KyqxDbm4GsH88uE0t2CWRlMKc/dGhXNB6QJeIioE7v/09UKKNEPwkc57KCorXq5/Zbw5Q==
 
-"@videosdk.live/react-sdk@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@videosdk.live/react-sdk/-/react-sdk-0.8.0.tgz#515a3607280a14cd9c7e1bcd60c779fbc19891e1"
-  integrity sha512-GZuESWZ/vAK0KT9s4Nbgb0kQQdpdtCPCPUzhv2QXdvN4OOLhj2I9OKiyDqYpmyHUK8kQWAbMFlHUeANGbKsMPQ==
+"@videosdk.live/react-sdk@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@videosdk.live/react-sdk/-/react-sdk-1.0.1.tgz#49c66b58f4ea314e1414f340c6e7e7426625ce33"
+  integrity sha512-sUP5iONoRuMu2WcZW6NV2pzl3kkZLV7D7NgWB9Wo6FR9i5++5gMohzH8ABN4oLmTFxaSYRKyizAZfDmLVqZ4rA==
   dependencies:
-    "@videosdk.live/js-sdk" "0.7.0"
+    "@videosdk.live/js-sdk" "1.0.1"
     events "^3.3.0"
+    react-tracked "2.0.1"
 
 "@vimeo/player@2.29.0":
   version "2.29.0"
@@ -1781,6 +1782,11 @@ prop-types@^15.8.1:
     object-assign "^4.1.1"
     react-is "^16.13.1"
 
+proxy-compare@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/proxy-compare/-/proxy-compare-3.0.1.tgz#3262cff3a25a6dedeaa299f6cf2369d6f7588a94"
+  integrity sha512-V9plBAt3qjMlS1+nC8771KNf6oJ12gExvaxnNzN/9yVRLdTv/lc+oJlnSzrdYDAvBfTStPCoiaCOTmTs0adv7Q==
+
 punycode@^2.1.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.1.tgz#027422e2faec0b25e1549c3e1bd8309b9133b6e5"
@@ -1818,6 +1824,14 @@ react-refresh@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.18.0.tgz#2dce97f4fe932a4d8142fa1630e475c1729c8062"
   integrity sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==
+
+react-tracked@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-tracked/-/react-tracked-2.0.1.tgz#eb644218497a9513c45990b2d09d18e9eb99b753"
+  integrity sha512-qjbmtkO2IcW+rB2cFskRWDTjKs/w9poxvNnduacjQA04LWxOoLy9J8WfIEq1ahifQ/tVJQECrQPBm+UEzKRDtg==
+  dependencies:
+    proxy-compare "^3.0.0"
+    use-context-selector "^2.0.0"
 
 react@^19.2.0:
   version "19.2.4"
@@ -1981,6 +1995,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-context-selector@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/use-context-selector/-/use-context-selector-2.0.0.tgz#3b5dafec7aa947c152d4f0aa7f250e99a205df3d"
+  integrity sha512-owfuSmUNd3eNp3J9CdDl0kMgfidV+MkDvHPpvthN5ThqM+ibMccNE0k+Iq7TWC6JPFvGZqanqiGCuQx6DyV24g==
 
 vimeo-video-element@^1.6.1:
   version "1.7.0"
