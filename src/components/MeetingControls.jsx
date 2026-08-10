@@ -56,6 +56,9 @@ const GroupWrapper = forwardRef(({ children, className, onClick }, ref) => (
 export const MeetingControls = ({ onEnd, onChatToggle }) => {
   const {
     localParticipant,
+    localMicOn,
+    localWebcamOn,
+    localScreenShareOn,
     toggleMic,
     toggleWebcam,
     toggleScreenShare,
@@ -92,9 +95,9 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
   const speakerRef = useRef(null);
   const webcamRef = useRef(null);
 
-  const micOn = localParticipant?.micOn ?? false;
-  const videoOn = localParticipant?.webcamOn ?? false;
-  const sharingOn = localParticipant?.screenShareOn ?? false;
+  const micOn = localMicOn ?? false;
+  const videoOn = localWebcamOn ?? false;
+  const sharingOn = localScreenShareOn ?? false;
 
   const toggleDropdown = (type) => {
     if (type === "mic" && (!micOn || !audioPermission)) return;
