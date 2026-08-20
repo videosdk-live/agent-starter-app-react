@@ -139,18 +139,18 @@ export const MeetingControls = ({ onEnd, onChatToggle }) => {
   };
 
   const handleChangeMic = async (id, label) => {
-    setSelectedMic({ id, label });
     try {
       await changeMic(id);
+      setSelectedMic({ id, label });
     } catch (err) {
       console.error('changeMic failed', err);
     }
   };
 
   const handleChangeWebcam = async (id, label) => {
-    setSelectedWebcam({ id, label });
     try {
       await changeWebcam(id);
+      setSelectedWebcam({ id, label });
     } catch (err) {
       console.error('changeWebcam failed', err);
     }
