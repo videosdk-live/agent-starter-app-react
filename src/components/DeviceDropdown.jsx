@@ -28,25 +28,31 @@ const DeviceDropdown = ({
 
   useEffect(() => {
     const fetchDevices = async () => {
+      let perms;
       try {
-        const perms = await checkPermissions();
-        setPermissionsMap(perms);
+        perms = await checkPermissions();
+      } catch (err) {
+        console.error('checkPermissions failed', err);
+        return;
+      }
+      setPermissionsMap(perms);
 
-        const hasPerm =
-          type === "mic" || type === "speaker"
-            ? perms?.get(Constants.permission.AUDIO)
-            : perms?.get(Constants.permission.VIDEO);
+      const hasPerm =
+        type === "mic" || type === "speaker"
+          ? perms?.get(Constants.permission.AUDIO)
+          : perms?.get(Constants.permission.VIDEO);
 
-        if (hasPerm) {
-          let list = [];
+      if (hasPerm) {
+        let list = [];
+        try {
           if (type === "mic") list = (await getMicrophones()) || [];
           else if (type === "webcam") list = (await getCameras()) || [];
           else if (type === "speaker")
             list = (await getPlaybackDevices()) || [];
-          setDevices(list);
+        } catch (err) {
+          console.error('getDevices failed', err);
         }
-      } catch (e) {
-        console.error("Error fetching devices", e);
+        setDevices(list);
       }
     };
     fetchDevices();
@@ -88,8 +94,8 @@ const DeviceDropdown = ({
       await requestPermission();
       // Re-fetch devices after permission is granted
       onClose();
-    } catch (e) {
-      console.error("Error requesting permission", e);
+    } catch (err) {
+      console.error('requestPermission failed', err);
     }
   };
 

@@ -8,8 +8,22 @@ import sampleGif from "../assets/sample_gif.gif";
 import ScreenSharePlaceholder from "./ScreenSharePlaceholder";
 
 const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
-  const { participants, localParticipant, disableScreenShare } = useMeeting();
+  const {
+    participants,
+    localParticipant,
+    localWebcamOn,
+    localScreenShareOn,
+    disableScreenShare,
+  } = useMeeting();
   const [transcriptions, setTranscriptions] = useState([]);
+
+  const handleStopSharing = async () => {
+    try {
+      await disableScreenShare();
+    } catch (err) {
+      console.error('disableScreenShare failed', err);
+    }
+  };
 
   const handleTranscription = (data) => {
     if (data?.segment?.text) {
@@ -32,9 +46,8 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
     [participants],
   );
 
-  const localWebcamOn = localParticipant?.webcamOn;
   const agentWebcamOn = agentParticipant?.webcamOn;
-  const sharingOn = localParticipant?.screenShareOn;
+  const sharingOn = localScreenShareOn;
   const anyTileVisible = !!(localWebcamOn || agentWebcamOn || sharingOn);
 
   useEffect(() => {
@@ -65,7 +78,7 @@ const MeetingView = ({ onTilesVisible, onAgentStateChanged, isChatOpen }) => {
             {/* Left side: Screen share placeholder */}
             <div className="flex-[3] min-h-0 pointer-events-auto">
               <ScreenSharePlaceholder
-                onStopSharing={() => disableScreenShare()}
+                onStopSharing={handleStopSharing}
               />
             </div>
 

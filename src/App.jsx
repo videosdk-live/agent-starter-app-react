@@ -17,7 +17,7 @@ const JoinMeeting = ({ onCapacityReached, onAgentLeft, onMeetingError }) => {
         onAgentLeft?.();
       }
     },
-    onMeetingStateChanged: (state) => {
+    onMeetingStateChanged: ({ state }) => {
       if (state === "FAILED") {
         onMeetingError?.(true);
       } else if (state === "DISCONNECTED") {
@@ -32,8 +32,12 @@ const JoinMeeting = ({ onCapacityReached, onAgentLeft, onMeetingError }) => {
   useEffect(() => {
     if (hasJoined.current) return;
     hasJoined.current = true;
-    setTimeout(() => {
-      join();
+    setTimeout(async () => {
+      try {
+        await join();
+      } catch (err) {
+        console.error('join failed', err);
+      }
     }, 1000);
   }, []);
 
@@ -44,11 +48,14 @@ const JoinMeeting = ({ onCapacityReached, onAgentLeft, onMeetingError }) => {
     if (hasCheckedCapacity.current) return;
     hasCheckedCapacity.current = true;
 
-    setTimeout(() => {
-
+    setTimeout(async () => {
       if (participants.size > 2) {
         console.warn("Meeting is full, leaving...");
-        leave();
+        try {
+          await leave();
+        } catch (err) {
+          console.error('leave failed', err);
+        }
         onCapacityReached?.();
       }
     }, 2000);
@@ -142,8 +149,12 @@ const MeetingProviderContent = ({
 }) => {
   const { end } = useMeeting();
 
-  const handleCloseModal = () => {
-    end();
+  const handleCloseModal = async () => {
+    try {
+      await end();
+    } catch (err) {
+      console.error('end failed', err);
+    }
     props.onEndAgent();
   };
 
